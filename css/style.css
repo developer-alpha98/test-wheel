@@ -45,7 +45,7 @@ body {
     flex-direction: column;
     padding: 0;
     margin: 0;
-    font-family: 'Yekan Bakh', sans-serif;
+    font-family: 'YekanBakh', sans-serif;
     font-size: 16px;
     background: var(--bg);
     color: var(--text);
@@ -170,7 +170,7 @@ a {
     justify-content: center;
     align-items: center;
     gap: 0;
-    font: 35px "Yekan Bakh", Impact;
+    font: 35px "YekanBakh", Impact;
     font-weight: 700;
 }
 
@@ -506,7 +506,7 @@ svg {
 
 .battle {
     position: absolute;
-    font-family: 'Yekan Bakh', sans-serif;
+    font-family: 'YekanBakh', sans-serif;
     font-style: normal;
     font-weight: 900;
     color: #FFFFCC;
@@ -552,7 +552,7 @@ svg {
     margin: 0;
     width: 200px;
     height: auto;
-    font-family: 'Yekan Bakh', sans-serif;
+    font-family: 'YekanBakh', sans-serif;
     font-size: 16px;
     font-weight: 500;
 }
@@ -567,7 +567,7 @@ svg {
     margin: 0;
     width: 40px;
     height: auto;
-    font-family: 'Yekan Bakh', sans-serif;
+    font-family: 'YekanBakh', sans-serif;
     font-size: 15px;
     font-weight: 500;
 }
@@ -640,7 +640,7 @@ svg {
 
     .battle {
         position: absolute;
-        font-family: 'Yekan Bakh', sans-serif;
+        font-family: 'YekanBakh', sans-serif;
         font-style: normal;
         font-weight: 900;
         color: #FFFFCC;
