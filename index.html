@@ -11,9 +11,9 @@
 <body>
 
 <div class="header">
-    <button class="header__setting">
+    <div class="header__setting" >
         <img src="img/interface/settings.png" alt="settings" class="header__setting-icon" width="24" height="24">
-    </button>
+    </div>
     <section class="header__logo">
         <div class="content">
             <h2 class="base">عمو آرمان</h2>
@@ -33,9 +33,16 @@
         </svg>
 
     </section>
-    <button class="header__volume">
-        <img src="img/interface/volume.png" alt="volume" class="header__volume-icon" width="24" height="24">
-    </button>
+    <div class="header__volume">
+        <label class="volume">
+            <input type="checkbox">
+            <svg viewBox="0 0 108 96">
+                <path d="M7,28 L35,28 L35,28 L59,8 L59,88 L35,68 L7,68 C4.790861,68 3,66.209139 3,64 L3,32 C3,29.790861 4.790861,28 7,28 Z"></path>
+                <path d="M79,62 C83,57.3333333 85,52.6666667 85,48 C85,43.3333333 83,38.6666667 79,34 L49,3"></path>
+                <path d="M95,69 C101.666667,61.6666667 105,54.3333333 105,47 C105,39.6666667 101.666667,32.3333333 95,25 L75.5,6 L49,33"></path>
+            </svg>
+        </label>
+    </div>
 </div>
 
 <div class="main">
@@ -112,183 +119,199 @@
     </div>
 </div>
 
-    <div class="settings">
-        <div class="settings__options">
-            <div class="settings__header">
+<div class="settings" id="settingsPanel">
+    <div class="settings__options">
+        <div class="settings__header">
+            <div class="settings__close">
                 <img src="img/interface/close.png" alt="close" width="24" height="24">
-                <h1 class="h1-black">تنظیمات</h1>
-                <img src="img/interface/info.png" alt="info" width="24" height="24">
             </div>
 
-            <div class="spin-time settings__section custom-select">
-
-                <div class="settings__item">
-                    <img src="img/interface/settings/spin-time.png" alt="spin-time" width="24" height="24">
-                    <span>زمان چرخش گردونه</span>
-                </div>
-
-                <div class="select-display">5 ثانیه</div>
-                <div class="select-options">
-                    <div class="option">4 ثانیه</div>
-                    <div class="option">5 ثانیه</div>
-                    <div class="option">8 ثانیه</div>
-                    <div class="option">10 ثانیه</div>
-                    <div class="option">15 ثانیه</div>
-                    <div class="option">30 ثانیه</div>
-                </div>
-
-            </div>
-
-            <div class="theme settings__section custom-select">
-
-                <div class="settings__item">
-                    <img src="img/interface/settings/theme.png" alt="theme" width="24" height="24">
-                    <span>ظاهر گردونه</span>
-                </div>
-
-                <div class="select-display">رنگارنگ</div>
-                <div class="select-options">
-                    <div class="option">رنگارنگ</div>
-                    <div class="option">نارنجی و سفید</div>
-                    <div class="option">بنفش و سفید</div>
-                    <div class="option">قرمز و سفید</div>
-                    <div class="option">سبز و سفید</div>
-                    <div class="option">آبی و سفید</div>
-                    <div class="option">زرد و مشکی</div>
-                    <div class="option">قرمز و مشکی</div>
-                </div>
-
-            </div>
-
-            <div class="mouse-pointer settings__section custom-select">
-
-                <div class="settings__item">
-                    <img src="img/interface/settings/mouse-pointer.png" alt="mouse-pointer" width="24" height="24">
-                    <span>آیکون نشانه گر ماوس</span>
-                </div>
-
-                <div class="select-display">عادی</div>
-                <div class="select-options">
-                    <div class="option">عادی</div>
-                    <div class="option">آبی</div>
-                    <div class="option">خاکستری</div>
-                    <div class="option">سفید</div>
-                    <div class="option">شیشه ای</div>
-                    <div class="option">کلاسیک</div>
-                    <div class="option">انگشت وسط کینگ</div>
-                    <div class="option">انگشت گابلین</div>
-                </div>
-
-            </div>
-
-            <div class="mouse-click-sound settings__section custom-select">
-
-                <div class="settings__item">
-                    <img src="img/interface/settings/mouse-click-sound.png" alt="mouse-click-sound" width="24"
-                         height="24">
-                    <span>صدای کلیک</span>
-                </div>
-
-                <div class="select-display">همه</div>
-                <div class="select-options">
-                    <div class="option">همه</div>
-                    <div class="option">صدای کلیک 1</div>
-                    <div class="option">صدای کلیک 2</div>
-                    <div class="option">صدای کلیک 3</div>
-                    <div class="option">ایموت های بازی</div>
-                </div>
-
-            </div>
-
-            <div class="spin-sound settings__section custom-select">
-
-                <div class="settings__item">
-                    <img src="img/interface/settings/spin-sound.png" alt="spin-sound" width="24" height="24">
-                    <span>صدای چرخش گردونه</span>
-                </div>
-
-                <div class="select-display">همه</div>
-                <div class="select-options">
-                    <div class="option">همه</div>
-                    <div class="option">عادی</div>
-                    <div class="option">تبل</div>
-                    <div class="option">تیک</div>
-                    <div class="option">بم</div>
-                    <div class="option">جیغ</div>
-                </div>
-
-            </div>
-
-            <div class="decision-sound settings__section custom-select" id="mySelect">
-
-                <div class="settings__item">
-                    <img src="img/interface/settings/decision-sound.png" alt="decision-sound" width="24" height="24">
-                    <span>صدای نتیجه گردونه</span>
-                </div>
-
-                <div class="select-display">همه</div>
-                <div class="select-options">
-                    <div class="option">همه</div>
-                    <div class="option">عمو آرمان</div>
-                    <div class="option">کاروشی</div>
-                    <div class="option">علی ادوکس</div>
-                    <div class="option">علی کیلر</div>
-                    <div class="option">میلاد فانتوم</div>
-                </div>
-
-            </div>
-
-            <label class="remove-duplicate settings__section switch">
-                <div class="settings__item">
-                    <img src="img/interface/settings/remove-duplicate.png" alt="remove-duplicate" width="24"
-                         height="24">
-                    <span>حذف گزینه تکراری</span>
-                </div>
-
-                <input type="checkbox">
-                <span class="switch-box"></span>
-
-            </label>
-
-            <label class="mute-click-sound settings__section switch">
-                <div class="settings__item">
-                    <img src="img/interface/settings/mute-click-sound.png" alt="mute-click-sound" width="24"
-                         height="24">
-                    <span>قطع صدای کلیک</span>
-                </div>
-
-                <input type="checkbox">
-                <span class="switch-box"></span>
-
-            </label>
-
-            <label class="mute-decision-sound settings__section switch">
-                <div class="settings__item">
-                    <img src="img/interface/settings/mute-decision-sound.png" alt="mute-decision-sound" width="24"
-                         height="24">
-                    <span>قطع صدای نتیجه گردونه</span>
-                </div>
-
-                <input type="checkbox">
-                <span class="switch-box"></span>
-
-            </label>
+            <h1 class="h1-black">تنظیمات</h1>
+            <img src="img/interface/info.png" alt="info" width="24" height="24">
         </div>
 
-        <div class="settings__footer">
-            <div class="settings__recovery-items primary-title">
-                <img src="img/interface/settings/recovery-items.png" alt="recovery-items" width="24"
-                     height="24">
-                <span>ریکاوری گزینه های حذف شده</span>
+        <div class="spin-time settings__section custom-select">
+
+            <div class="settings__item">
+                <img src="img/interface/settings/spin-time.png" alt="spin-time" width="24" height="24">
+                <span>زمان چرخش گردونه</span>
             </div>
-            <div class="settings__reset-settings primary-title-white">
-                <img src="img/interface/settings/reset.png" alt="reset" width="24"
+
+            <div class="select-display">5 ثانیه</div>
+            <div class="select-options">
+                <div class="option">4 ثانیه</div>
+                <div class="option">5 ثانیه</div>
+                <div class="option">8 ثانیه</div>
+                <div class="option">10 ثانیه</div>
+                <div class="option">15 ثانیه</div>
+                <div class="option">30 ثانیه</div>
+            </div>
+
+        </div>
+
+        <div class="theme settings__section custom-select">
+
+            <div class="settings__item">
+                <img src="img/interface/settings/theme.png" alt="theme" width="24" height="24">
+                <span>ظاهر گردونه</span>
+            </div>
+
+            <div class="select-display">رنگارنگ</div>
+            <div class="select-options">
+                <div class="option">رنگارنگ</div>
+                <div class="option">نارنجی و سفید</div>
+                <div class="option">بنفش و سفید</div>
+                <div class="option">قرمز و سفید</div>
+                <div class="option">سبز و سفید</div>
+                <div class="option">آبی و سفید</div>
+                <div class="option">زرد و مشکی</div>
+                <div class="option">قرمز و مشکی</div>
+            </div>
+
+        </div>
+
+        <div class="mouse-pointer settings__section custom-select">
+
+            <div class="settings__item">
+                <img src="img/interface/settings/mouse-pointer.png" alt="mouse-pointer" width="24" height="24">
+                <span>آیکون نشانه گر ماوس</span>
+            </div>
+
+            <div class="select-display">عادی</div>
+            <div class="select-options">
+                <div class="option">عادی</div>
+                <div class="option">آبی</div>
+                <div class="option">خاکستری</div>
+                <div class="option">سفید</div>
+                <div class="option">شیشه ای</div>
+                <div class="option">کلاسیک</div>
+                <div class="option">انگشت وسط کینگ</div>
+                <div class="option">انگشت گابلین</div>
+            </div>
+
+        </div>
+
+        <div class="mouse-click-sound settings__section custom-select">
+
+            <div class="settings__item">
+                <img src="img/interface/settings/mouse-click-sound.png" alt="mouse-click-sound" width="24"
                      height="24">
-                <span>ریست تمام تنظیمات</span>
+                <span>صدای کلیک</span>
+            </div>
+
+            <div class="select-display">همه</div>
+            <div class="select-options">
+                <div class="option">همه</div>
+                <div class="option">صدای کلیک 1</div>
+                <div class="option">صدای کلیک 2</div>
+                <div class="option">صدای کلیک 3</div>
+                <div class="option">ایموت های بازی</div>
+            </div>
+
+        </div>
+
+        <div class="spin-sound settings__section custom-select">
+
+            <div class="settings__item">
+                <img src="img/interface/settings/spin-sound.png" alt="spin-sound" width="24" height="24">
+                <span>صدای چرخش گردونه</span>
+            </div>
+
+            <div class="select-display">همه</div>
+            <div class="select-options">
+                <div class="option">همه</div>
+                <div class="option">عادی</div>
+                <div class="option">تبل</div>
+                <div class="option">تیک</div>
+                <div class="option">بم</div>
+                <div class="option">جیغ</div>
+            </div>
+
+        </div>
+
+        <div class="decision-sound settings__section custom-select" id="mySelect">
+
+            <div class="settings__item">
+                <img src="img/interface/settings/decision-sound.png" alt="decision-sound" width="24" height="24">
+                <span>صدای نتیجه گردونه</span>
+            </div>
+
+            <div class="select-display">همه</div>
+            <div class="select-options">
+                <div class="option">همه</div>
+                <div class="option">عمو آرمان</div>
+                <div class="option">کاروشی</div>
+                <div class="option">علی ادوکس</div>
+                <div class="option">علی کیلر</div>
+                <div class="option">میلاد فانتوم</div>
+            </div>
+
+        </div>
+
+        <label class="remove-duplicate settings__section switch">
+            <div class="settings__item">
+                <img src="img/interface/settings/remove-duplicate.png" alt="remove-duplicate" width="24"
+                     height="24">
+                <span>حذف گزینه تکراری</span>
+            </div>
+
+            <input type="checkbox">
+            <span class="switch-box"></span>
+
+        </label>
+
+        <label class="mute-click-sound settings__section switch">
+            <div class="settings__item">
+                <img src="img/interface/settings/mute-click-sound.png" alt="mute-click-sound" width="24"
+                     height="24">
+                <span>قطع صدای کلیک</span>
+            </div>
+
+            <input type="checkbox">
+            <span class="switch-box"></span>
+
+        </label>
+
+        <label class="mute-decision-sound settings__section switch">
+            <div class="settings__item">
+                <img src="img/interface/settings/mute-decision-sound.png" alt="mute-decision-sound" width="24"
+                     height="24">
+                <span>قطع صدای نتیجه گردونه</span>
+            </div>
+
+            <input type="checkbox">
+            <span class="switch-box"></span>
+
+        </label>
+
+        <div class="mute-decision-sound settings__section no-pointer">
+            <div class="settings__item">
+                <img src="img/interface/settings/mute-decision-sound.png" alt="mute-decision-sound" width="24"
+                     height="24">
+                <span>تنظیم صدای سایت</span>
+            </div>
+
+            <div class="volume-slider">
+                <input type="range" min="0" max="100" value="50" id="siteVolumeSlider">
+                <div class="slider-tooltip" id="sliderTooltip">50</div>
             </div>
         </div>
+
 
     </div>
+    <div class="settings__footer">
+        <div class="settings__recovery-items primary-title">
+            <img src="img/interface/settings/recovery-items.png" alt="recovery-items" width="24"
+                 height="24">
+            <span>ریکاوری گزینه های حذف شده</span>
+        </div>
+        <div class="settings__reset-settings primary-title-white">
+            <img src="img/interface/settings/reset.png" alt="reset" width="24"
+                 height="24">
+            <span>ریست تمام تنظیمات</span>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

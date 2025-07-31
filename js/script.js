@@ -100,4 +100,75 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
+
+
+
+    const volumeSlider = document.getElementById('siteVolumeSlider');
+    const sliderTooltip = document.getElementById('sliderTooltip');
+
+    function updateSlider() {
+        const value = volumeSlider.value;
+        sliderTooltip.textContent = value;
+        const percent = value / volumeSlider.max;
+        const thumbOffset = percent * volumeSlider.offsetWidth;
+
+        // تنظیم tooltip در محل مناسب روی thumb
+        sliderTooltip.style.left = `${thumbOffset}px`;
+
+        // تغییر رنگ پس‌زمینه‌ی اسلایدر
+        volumeSlider.style.background = `linear-gradient(to right, #6c5ce7 ${value}%, #ccc ${value}%)`;
+    }
+
+// نمایش tooltip هنگام hover یا drag
+    volumeSlider.addEventListener('input', () => {
+        updateSlider();
+        sliderTooltip.style.opacity = 1;
+        sliderTooltip.style.top = '-35px';
+    });
+
+    volumeSlider.addEventListener('mouseenter', () => {
+        sliderTooltip.style.opacity = 1;
+        updateSlider();
+    });
+
+    volumeSlider.addEventListener('mouseleave', () => {
+        sliderTooltip.style.opacity = 0;
+    });
+
+
+
+
+
+
 });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const openBtn = document.querySelector(".header__setting");
+    const settingsPanel = document.querySelector(".settings");
+
+    // باز کردن پنل تنظیمات با کلاس active
+    openBtn.addEventListener("click", function () {
+        settingsPanel.style.display = "block"; // ابتدا نمایش بده که transition کار کنه
+
+        // کمی تأخیر برای اعمال transition
+        setTimeout(() => {
+            settingsPanel.classList.add("active");
+        }, 10);
+    });
+
+    // بستن تنظیمات با حذف کلاس و بعد از transition، مخفی‌سازی
+    settingsPanel.addEventListener("click", function (e) {
+        if (e.target.closest(".settings__close")) {
+            settingsPanel.classList.remove("active");
+
+            // بعد از انیمیشن، display رو none کن
+            setTimeout(() => {
+                settingsPanel.style.display = "none";
+            }, 300); // مدت زمان transition در CSS
+        }
+    });
+});
+
