@@ -738,6 +738,7 @@ svg {
 
 .footer {
     position: relative;
+    bottom: -50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
