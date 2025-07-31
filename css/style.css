@@ -227,7 +227,7 @@ a {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 5px 0;
+    padding: 10px 5px 0;
 }
 
 .header__logo {
@@ -269,9 +269,9 @@ a {
 
 .content h2 {
     color: #fff;
-    font-size: 38px;
+    font-size: 28px;
     font-weight: 700;
-    margin: 0;
+    margin: 5px;
     padding: 0;
     text-wrap: nowrap;
 }
@@ -379,7 +379,7 @@ a {
 svg {
     width: 100%;
     height: auto;
-    max-width: 120px; /* ابعاد اصلی SVG */
+    max-width: 180px; /* ابعاد اصلی SVG */
     margin-bottom: -10px;
 }
 
