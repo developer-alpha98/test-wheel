@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,7 +7,6 @@
     <title>Spinning Wheel</title>
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>
 </head>
 <body>
 
@@ -47,8 +47,22 @@
 
 <div class="main">
     <div class="wheel">
-        <div class="wheel__options">
-
+        <div class="wheel-container">
+            <svg id="spinningWheel" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
+                <g id="slices" transform="translate(250,250)"></g>
+                <!-- دکمه وسط -->
+                <circle id="spinButton" cx="250" cy="250" r="50" />
+                <image
+                        id="spinButtonIcon"
+                        href="img/interface/start.png"
+                        x="238"
+                        y="238"
+                        width="24"
+                        height="24"
+                />
+            </svg>
+            <!-- فلش سمت راست -->
+            <div class="wheel-arrow"></div>
         </div>
     </div>
     <div class="edit-wheel-items">
@@ -79,35 +93,7 @@
             </div>
             <img src="img/interface/settings/reset.png" alt="reset" width="24" height="24">
         </div>
-        <div class="edit-wheel-items__wheel-item">
-            <input type="text" class="edit-wheel-items__item-rate" value="1" maxlength="3">
-            <input type="text" class="edit-wheel-items__input" placeholder="چالش جدید را وارد کنید">
-            <img src="img/interface/wheel-items/remove-item.png" alt="remove-item" width="24" height="24">
-        </div>
 
-        <div class="edit-wheel-items__wheel-item">
-            <input type="number" class="edit-wheel-items__item-rate" value="1">
-            <input type="text" class="edit-wheel-items__input" placeholder="چالش جدید را وارد کنید">
-            <img src="img/interface/wheel-items/remove-item.png" alt="remove-item" width="24" height="24">
-        </div>
-
-        <div class="edit-wheel-items__wheel-item">
-            <input type="number" class="edit-wheel-items__item-rate" value="1">
-            <input type="text" class="edit-wheel-items__input" placeholder="چالش جدید را وارد کنید">
-            <img src="img/interface/wheel-items/remove-item.png" alt="remove-item" width="24" height="24">
-        </div>
-
-        <div class="edit-wheel-items__wheel-item">
-            <input type="number" class="edit-wheel-items__item-rate" value="1">
-            <input type="text" class="edit-wheel-items__input" placeholder="چالش جدید را وارد کنید">
-            <img src="img/interface/wheel-items/remove-item.png" alt="remove-item" width="24" height="24">
-        </div>
-
-        <div class="edit-wheel-items__wheel-item">
-            <input type="number" class="edit-wheel-items__item-rate" value="1">
-            <input type="text" class="edit-wheel-items__input" placeholder="چالش جدید را وارد کنید">
-            <img src="img/interface/wheel-items/remove-item.png" alt="remove-item" width="24" height="24">
-        </div>
 
         <div class="edit-wheel-items__header">
             <div class="edit-wheel-items__add-item">
@@ -325,5 +311,6 @@
     </div>
 </div>
 
+<script src="js/script.js"></script>
 </body>
 </html>

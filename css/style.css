@@ -376,7 +376,7 @@ a {
 
 /* Other styles */
 
-svg {
+.header__logo svg {
     width: 100%;
     height: auto;
     max-width: 180px; /* ابعاد اصلی SVG */
@@ -393,7 +393,7 @@ svg {
         height: auto;
     }
 
-    svg {
+    .header__logo svg {
         width: 100%;
         height: auto;
         max-width: 210px; /* ابعاد اصلی SVG */
@@ -430,16 +430,18 @@ svg {
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
     padding-top: 30px;
     gap: 30px;
+    position: relative;
+    aspect-ratio: 1;
+    margin: auto;
 }
 
 .wheel {
     width: 100%;
-    max-width: 90%;
+    max-width: 100%;
     aspect-ratio: 1;
     border-radius: 50%;
     background-color: #fff;
@@ -463,16 +465,58 @@ svg {
 @media (min-width: 554px) {
 
     .main {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
         padding-top: 50px;
         gap: 50px;
     }
 
 }
+
+
+
+
+/* spinning wheel --------------------------------------- */
+
+.wheel-container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+}
+
+
+
+#spinningWheel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#spinButton {
+    cursor: pointer;
+    fill: #6c5ce7;
+    stroke: white;
+    stroke-width: 4;
+    transition: transform .2s ease;
+}
+
+
+.wheel-arrow {
+    position: absolute;
+    right: 0; /* بیرون از دایره */
+    top: 50%;
+    transform: translateY(-50%) rotateY(180deg);
+    width: 0;
+    height: 0;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    border-left: 30px solid #ffdd57;
+    filter: drop-shadow(0 0 6px rgba(255,221,87,.8));
+}
+
+#spinButtonIcon {
+    pointer-events: none;
+}
+
 
 /* wheel item input --------------------------------------- */
 
@@ -732,7 +776,6 @@ svg {
     }
 
 }
-
 
 /* footer --------------------------------------- */
 
