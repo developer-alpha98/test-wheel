@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
         VOLUME: "siteVolume",
     };
 
+    let previousSliceIndex = -1;
+
     // ---------- Persistence helpers ----------
     function saveWheelItems() {
         const items = Array.from(document.querySelectorAll(".edit-wheel-items__wheel-item")).map(item => {
@@ -330,6 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!items.length) {
             items.push({ rate: 1, text: "هیچ‌چیز" });
         }
+        
 
         const totalWeight = items.reduce((sum, it) => sum + it.rate, 0);
         let startAngle = 0;
@@ -338,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const sliceAngle = (item.rate / totalWeight) * 360;
             const midAngle = startAngle + sliceAngle / 2;
 
-            const radius = 245;
+            const radius = 220;
             const largeArc = sliceAngle > 180 ? 1 : 0;
             const from = polarToCartesian(radius, startAngle);
             const to = polarToCartesian(radius, startAngle + sliceAngle);
@@ -367,7 +370,12 @@ document.addEventListener("DOMContentLoaded", function () {
             textEl.setAttribute("fill", "#fff");
             textEl.setAttribute("font-weight", "600");
             textEl.setAttribute("font-family", "YekanBakh, sans-serif");
-            textEl.textContent = item.text;
+            let displayText = item.text;
+            if (displayText.length > 19) {
+                displayText = displayText.substring(0, 16) + '...';
+            }
+            textEl.textContent = displayText;
+            textEl.setAttribute("direction", "ltr");
 
             // همه متن‌ها رو به سمت مرکز راست کنیم (بدون چرخش ۱۸۰)
             textEl.setAttribute("transform", `rotate(${midAngle} ${textPos.x} ${textPos.y})`);
@@ -378,7 +386,9 @@ document.addEventListener("DOMContentLoaded", function () {
             slicesGroup.appendChild(group);
 
             startAngle += sliceAngle;
+
         });
+
     }
 
 
@@ -396,42 +406,35 @@ document.addEventListener("DOMContentLoaded", function () {
     function spinWheel() {
         if (isSpinning) return;
         isSpinning = true;
-        buildWheel(); // مطمئن شو تازه‌سازیه
+        buildWheel();
 
         const items = getWheelItemsFromDOM();
         if (!items.length) {
             isSpinning = false;
             return;
         }
-
         const selectedIndex = pickWeightedIndex(items);
-        // پیدا کردن midAngle آن اسلایس
-        const sliceGroups = Array.from(slicesGroup.children);
-        if (selectedIndex < 0 || selectedIndex >= sliceGroups.length) {
-            isSpinning = false;
-            return;
+        const totalWeight = items.reduce((s, i) => s + i.rate, 0);
+        let angleSum = 0;
+        let selectedAngle = 0;
+
+        for (let i = 0; i <= selectedIndex; i++) {
+            const sliceAngle = (items[i].rate / totalWeight) * 360;
+            if (i === selectedIndex) {
+                selectedAngle = angleSum + sliceAngle / 2;
+            }
+            angleSum += sliceAngle;
         }
 
-        const selectedPath = sliceGroups[selectedIndex].querySelector("path");
-        const midAngle = parseFloat(selectedPath.dataset.midAngle); // درجه‌ای نسبت به راست
-        // می‌خواهیم آن وسط بیاد کنار فلش راست => چرخش طوری که midAngle به 0 برسد
-        // currentAngle نگهدارنده‌ی زاویه‌ی فعلی است
-        const normalizedCurrent = ((currentAngle % 360) + 360) % 360;
-        const targetOffset = (360 - midAngle) % 360; // جوری که midAngle به راست بیاد
-        const minTurns = 3;
-        const maxTurns = 20;
-        const extraTurns = Math.random() * (maxTurns - minTurns) + minTurns; // 3 تا 8 دور، اعشاری
+        const minTurns = 4;
+        const maxTurns = 7;
+        const extraTurns = Math.random() * (maxTurns - minTurns) + minTurns;
+        const randomNoise = (Math.random() - 0.5) * 20;
+        const finalRotation = extraTurns * 360 + (360 + randomNoise - selectedAngle);
 
-// کمی نویز رندوم برای زاویه نهایی (مثلاً ±5 درجه)
-        const randomNoise = (Math.random() - 0.3) * 3;
-
-        const finalRotation = extraTurns * 360 + targetOffset + randomNoise;
-
-// مدت زمان هم کمی رندوم باشه (۴ تا ۶ ثانیه)
-        const duration = 4000 + Math.random() * 2000; // ms
-
+        const duration = 4500;
         const startTime = performance.now();
-        const startAngle = normalizedCurrent;
+        const startAngle = currentAngle;
 
         function easeOutCubic(t) {
             return 1 - Math.pow(1 - t, 3);
@@ -443,23 +446,88 @@ document.addEventListener("DOMContentLoaded", function () {
             const eased = easeOutCubic(progress);
             const delta = finalRotation * eased;
             const newAngle = startAngle + delta;
+
             currentAngle = newAngle;
+
+            // بچرخون
             slicesGroup.setAttribute('transform', `translate(250,250) rotate(${newAngle})`);
+            const currentAbsoluteAngle = ((newAngle % 360) + 360) % 360;
+            const pointerAngle = (360 - currentAbsoluteAngle) % 360;
+
+            // محاسبه index قطعه فعلی
+            const currentSliceIndex = getSelectedSliceIndex(pointerAngle, items);
+
+            // اگر وارد قطعه جدید شدیم، فلش رو لرزش بده
+            if (currentSliceIndex !== previousSliceIndex) {
+                previousSliceIndex = currentSliceIndex;
+
+                const pointer = document.querySelector(".wheel-arrow");
+                if (pointer) {
+                    pointer.classList.remove("tick"); // ریست انیمیشن
+                    void pointer.offsetWidth; // ترفند ریست انیمیشن
+                    pointer.classList.add("tick");
+                }
+
+            }
+
             if (progress < 1) {
                 requestAnimationFrame(frame);
             } else {
                 isSpinning = false;
-                // نتیجه را نمایش بده
+
+                const finalAbsoluteAngle = ((newAngle % 360) + 360) % 360;
+                // چون گردونه ساعتگرد چرخیده، آیتمی که در زاویه (360 - finalAngle) است میاد زیر فلش
+                const pointerAngle = (360 - finalAbsoluteAngle) % 360;
+
+                const selectedIndex = getSelectedSliceIndex(pointerAngle, items);
+
                 const resultText = items[selectedIndex].text;
-                setTimeout(() => {
-                    // می‌تونی alert رو جایگزین با UI بهتر کنی
-                    alert("نتیجه: " + resultText);
-                }, 100);
+                Swal.fire({
+                    title: 'نتیجه گردون 🎲',
+                    html: `<div style="font-family: YekanBakh, sans-serif; font-size: 18px;">${resultText}</div>`,
+                    icon: 'success',
+                    confirmButtonText: 'باشه',
+                    background: '#121117',
+                    color: '#ffffff',
+                    confirmButtonColor: '#6D49FF',
+                    showClass: {
+                        popup: 'animate__animated animate__zoomInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOut',
+                    },
+                    customClass: {
+                        popup: 'sweet-popup',
+                        confirmButton: 'sweet-confirm-btn'
+                    }
+                });
+                // آپدیت باکس پایین گردونه
+                document.getElementById("lastSelectedText").textContent = resultText;
+
             }
         }
 
         requestAnimationFrame(frame);
     }
+
+
+
+    function getSelectedSliceIndex(pointerAngle, items) {
+        const totalWeight = items.reduce((sum, it) => sum + it.rate, 0);
+        let start = 0;
+        for (let i = 0; i < items.length; i++) {
+            const sliceAngle = (items[i].rate / totalWeight) * 360;
+            const end = start + sliceAngle;
+            if (pointerAngle >= start && pointerAngle < end) {
+                return i;
+            }
+            start = end;
+        }
+        return 0; // fallback
+    }
+
+
+
 
     // بازسازی اولیه
     buildWheel();

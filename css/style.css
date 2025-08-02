@@ -43,6 +43,7 @@ body.dark {
 body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 0;
     margin: 0;
     font-family: 'YekanBakh', sans-serif;
@@ -433,7 +434,7 @@ a {
     align-items: center;
     width: 100%;
     padding-top: 30px;
-    gap: 30px;
+    gap: 20px;
     position: relative;
     aspect-ratio: 1;
     margin: auto;
@@ -441,10 +442,41 @@ a {
 
 .wheel {
     width: 100%;
-    max-width: 100%;
+    max-width: 95%;
     aspect-ratio: 1;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: transparent;
+}
+
+
+.wheel-overlay {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotateY(180deg) rotate(0deg);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.wheel-overlay-theme-1 {
+    background-image: url("../img/wheel-bg/02.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@media (min-width: 554px) {
+
+    .main {
+        padding-top: 50px;
+        gap: 30px;
+    }
+
+    .wheel {
+        max-width: 85%;
+    }
+
 }
 
 @media (min-width: 850px) {
@@ -454,24 +486,37 @@ a {
     }
 }
 
+@media (min-width: 1100px) {
+
+    .wheel {
+        max-width: 50%;
+    }
+
+}
+
 @media (min-width: 1300px) {
 
     .wheel {
-        max-width: 40%;
+        max-width: 50%;
     }
 
 }
 
-@media (min-width: 554px) {
+@media (min-width: 1450px) {
 
-    .main {
-        padding-top: 50px;
-        gap: 50px;
+    .wheel {
+        max-width: 45%;
     }
 
 }
 
+@media (min-width: 1600px) {
 
+    .wheel {
+        max-width: 35%;
+    }
+
+}
 
 
 /* spinning wheel --------------------------------------- */
@@ -499,24 +544,72 @@ a {
     transition: transform .2s ease;
 }
 
+#spinButtonIcon {
+    pointer-events: none;
+}
 
 .wheel-arrow {
     position: absolute;
-    right: 0; /* بیرون از دایره */
+    right: 0;
     top: 50%;
-    transform: translateY(-50%) rotateY(180deg);
+    transform: translateY(-50%) rotateY(180deg) rotate(0deg);
     width: 0;
     height: 0;
     border-top: 18px solid transparent;
     border-bottom: 18px solid transparent;
     border-left: 30px solid #ffdd57;
     filter: drop-shadow(0 0 6px rgba(255,221,87,.8));
+    transform-origin: center left;
+    z-index: 5;
 }
 
-#spinButtonIcon {
-    pointer-events: none;
+.wheel-arrow.tick {
+    animation: arrowTick 0.4s ease;
 }
 
+@keyframes arrowTick {
+    0%   { transform: translateY(-50%) rotateY(180deg) rotate(0deg); }
+    30%  { transform: translateY(-50%) rotateY(180deg) rotate(25deg); }
+    70%  { transform: translateY(-50%) rotateY(180deg) rotate(20deg); }
+    100% { transform: translateY(-50%) rotateY(180deg) rotate(0deg); }
+}
+
+
+.last-selected {
+    font-family: YekanBakh, sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #1e1c26;
+    border: 2px dashed #6D49FF;
+    border-radius: 16px;
+    padding: 12px 20px;
+    text-align: center;
+    width: fit-content;
+    max-width: 90%;
+    margin: 0 auto;
+    box-shadow: 0 0 12px rgba(109, 73, 255, 0.3);
+    direction: rtl;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s ease-in-out;
+}
+
+#lastSelectedText {
+    font-size: 20px;
+    font-weight: bold;
+    color: #6c5ce7;
+}
+
+
+@media (max-width: 554px) {
+    .wheel-arrow {
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-left: 20px solid #ffdd57;
+    }
+}
 
 /* wheel item input --------------------------------------- */
 
@@ -559,8 +652,8 @@ a {
 }
 
 .couche1:hover .couche2 {
-    width: 244px;
-    height: 60px;
+    width: 194px;
+    height: 54px;
     margin-top: 7px;
 }
 
@@ -717,6 +810,12 @@ a {
 
 @media (min-width: 554px) {
 
+    .couche1:hover .couche2 {
+        width: 244px;
+        height: 60px;
+        margin-top: 7px;
+    }
+
     .edit-wheel-items__input {
         width: 300px;
     }
@@ -781,7 +880,7 @@ a {
 
 .footer {
     position: relative;
-    bottom: -50px;
+    bottom: 0;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -1163,5 +1262,46 @@ a {
 
     .settings__section {
         padding: 15px 25px;
+    }
+}
+
+
+/* برای SweetAlert2 */
+.swal2-popup.sweet-popup {
+    border-radius: 25px !important;
+    padding: 30px 20px !important;
+    box-shadow: 0 0 20px rgba(109, 73, 255, 0.4);
+}
+
+.swal2-confirm.sweet-confirm-btn {
+    font-family: 'YekanBakh', sans-serif !important;
+    font-size: 16px !important;
+    padding: 10px 25px !important;
+    border-radius: 10px !important;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.swal2-confirm.sweet-confirm-btn:hover {
+    background-color: #5839d9 !important;
+    transform: scale(1.05);
+}
+
+/* کاهش اندازه در موبایل */
+@media (max-width: 768px) {
+    .swal2-popup.sweet-popup {
+        font-size: 14px !important;
+    }
+
+    .swal2-title {
+        font-size: 22px !important;
+    }
+
+    .swal2-html-container {
+        font-size: 14px !important;
+    }
+
+    .swal2-confirm.sweet-confirm-btn {
+        font-size: 14px !important;
+        padding: 8px 18px !important;
     }
 }

@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Spinning Wheel</title>
     <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
 <div class="header">
-    <div class="header__setting" >
+    <div class="header__setting">
         <img src="img/interface/settings.png" alt="settings" class="header__setting-icon" width="24" height="24">
     </div>
     <section class="header__logo">
@@ -46,24 +47,30 @@
 </div>
 
 <div class="main">
-    <div class="wheel">
+    <div class="wheel wheel-theme-1">
         <div class="wheel-container">
             <svg id="spinningWheel" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet">
                 <g id="slices" transform="translate(250,250)"></g>
                 <!-- دکمه وسط -->
-                <circle id="spinButton" cx="250" cy="250" r="50" />
+                <circle id="spinButton" cx="250" cy="250" r="50"/>
                 <image
                         id="spinButtonIcon"
                         href="img/interface/start.png"
-                        x="238"
-                        y="238"
-                        width="24"
-                        height="24"
+                        x="234"
+                        y="234"
+                        width="32"
+                        height="32"
                 />
             </svg>
             <!-- فلش سمت راست -->
             <div class="wheel-arrow"></div>
+            <div class="wheel-overlay wheel-overlay-theme-1">
         </div>
+        </div>
+    </div>
+    <div class="last-selected">
+        <span>آخرین چالش:</span>
+        <strong id="lastSelectedText">هنوز گردونه و نچرخوندی</strong>
     </div>
     <div class="edit-wheel-items">
         <div class="edit-wheel-items__header">
